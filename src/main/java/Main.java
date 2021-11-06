@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
@@ -10,11 +8,14 @@ public class Main {
 
         List<FrogCommand> commands = new ArrayList<>();
         int curCommand = -1;
+        
+        paintField(frog);
 
         while (true) {
             //считываем ввод и конструируем комманду, если
             //пользователь не хотел выйти
-            System.out.println("Введите команду");
+            outputCommand();
+            System.out.println("Введите команду:");
             String newCommand = scanner.nextLine();
 
             switch (newCommand) {
@@ -53,6 +54,15 @@ public class Main {
             // рисуем поле после команды
             paintField(frog);
         }
+    }
+
+    private static void outputCommand() {
+        System.out.println("+N - прыгни на N шагов направо");
+        System.out.println("-N - прыгни на N шагов налево");
+        System.out.println("<< - Undo (отмени последнюю команду)");
+        System.out.println(">> - Redo (повтори отменённую команду)");
+        System.out.println("!! - повтори последнюю команду");
+        System.out.println("0 - выход");
     }
 
     private static boolean undoCommand(List<FrogCommand> commands, int curCommand) {
